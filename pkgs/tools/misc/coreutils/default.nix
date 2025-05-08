@@ -112,6 +112,9 @@ stdenv.mkDerivation rec {
     + (optionalString stdenv.hostPlatform.isAarch64 ''
       # Sometimes fails: https://github.com/NixOS/nixpkgs/pull/143097#issuecomment-954462584
       sed '2i echo Skipping cut huge range test && exit 77' -i ./tests/cut/cut-huge-range.sh
+    '')
+    + (optionalString stdenv.hostPlatform.isS390x ''
+      sed '2i echo Skipping ls acl test && exit 77' -i ./tests/ls/acl.sh
     '');
 
   outputs = [
